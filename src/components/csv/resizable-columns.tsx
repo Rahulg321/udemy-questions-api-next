@@ -23,17 +23,16 @@ export function ResizableColumn({
     startWidth.current = width;
   };
 
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!isResizing) return;
-    const diff = e.pageX - startX.current;
-    onResize(Math.max(100, startWidth.current + diff));
-  };
-
-  const handleMouseUp = () => {
-    setIsResizing(false);
-  };
-
   useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isResizing) return;
+      const diff = e.pageX - startX.current;
+      onResize(Math.max(100, startWidth.current + diff));
+    };
+
+    const handleMouseUp = () => {
+      setIsResizing(false);
+    };
     if (isResizing) {
       window.addEventListener("mousemove", handleMouseMove);
       window.addEventListener("mouseup", handleMouseUp);
@@ -42,7 +41,7 @@ export function ResizableColumn({
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [isResizing]);
+  }, [isResizing, onResize]);
 
   return (
     <div style={{ width: `${width}px`, position: "relative" }}>
