@@ -14,20 +14,6 @@ export default function CTA() {
         <motion.div
           key={i}
           className="absolute w-1 h-1 bg-white rounded-full"
-          initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-            opacity: 0.1 + Math.random() * 0.3,
-          }}
-          animate={{
-            y: [null, "-100vh"],
-            opacity: [null, 0],
-          }}
-          transition={{
-            duration: 10 + Math.random() * 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
         />
       ))}
 

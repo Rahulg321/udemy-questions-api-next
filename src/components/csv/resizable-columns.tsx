@@ -24,6 +24,11 @@ export function ResizableColumn({
   };
 
   useEffect(() => {
+    if (typeof window === "undefined") {
+      // If window is undefined, exit early to prevent errors during SSR
+      return;
+    }
+
     const handleMouseMove = (e: MouseEvent) => {
       if (!isResizing) return;
       const diff = e.pageX - startX.current;
