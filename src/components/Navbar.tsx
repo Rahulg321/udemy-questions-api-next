@@ -1,17 +1,23 @@
 import { Code, Coins, BookOpen, Users } from "lucide-react";
 import Logo from "./Logo";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 const navItems = [
-  { icon: Code, text: "API", href: "/api/introduction" },
+  { icon: Code, text: "API", href: "/api" },
   { icon: Coins, text: "Pricing", href: "/pricing" },
-  { icon: BookOpen, text: "Documentation", href: "/docs/introduction" },
+  { icon: BookOpen, text: "Documentation", href: "/docs" },
   { icon: Users, text: "Community", href: "/community" },
 ];
 
-export default function Navbar() {
+export default function Navbar({ classname }: { classname?: string }) {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-sm border-b border-gray-800">
+    <nav
+      className={cn(
+        "z-50 bg-gray-900/80 backdrop-blur-sm border-b border-gray-800",
+        classname
+      )}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Logo />
