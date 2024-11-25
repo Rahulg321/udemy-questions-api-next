@@ -9,6 +9,11 @@ import Pricing from "@/components/sections/pricing";
 import Testimonials from "@/components/sections/testimonials";
 import React from "react";
 
+export const metadata = {
+  title: "Home",
+  description: "Welcome to the official website of HydraNode API Generator",
+};
+
 const HomePage = async () => {
   return (
     <React.Fragment>
