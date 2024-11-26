@@ -1,124 +1,174 @@
-"use client";
+import { GalleryVerticalEnd, Minus, Plus, Search } from "lucide-react";
 
 import {
-  Calendar,
-  ChevronDown,
-  Home,
-  Inbox,
-  Search,
-  Settings,
-} from "lucide-react";
-import { useState } from "react";
-
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubItem,
-  SidebarMenuSubButton,
-} from "@/components/ui/sidebar";
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarHeader,
+  SidebarInput,
+  SidebarInset,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
+  SidebarProvider,
+  SidebarRail,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 
-// Menu items with nested structure
-const items = [
-  {
-    title: "Get Started",
-    icon: Home,
-    subItems: [{ title: "Introduction", url: "/api/introduction" }],
-  },
-  {
-    title: "Endpoints",
-    icon: Inbox,
-    subItems: [
-      { title: "Create API Key", url: "/api/create-api-key" },
-      { title: "Generate Questions", url: "/api/generate-questions" },
-      { title: "Get Task Status", url: "/api/get-task-status" },
-      { title: "Download CSV", url: "/api/download-csv" },
-    ],
-  },
-  {
-    title: "Guides",
-    icon: Calendar,
-    subItems: [
-      { title: "Authentication", url: "#authentication" },
-      { title: "Error Handling", url: "#error-handling" },
-    ],
-  },
-  {
-    title: "Resources",
-    icon: Search,
-    subItems: [
-      { title: "API Reference", url: "#api-reference" },
-      { title: "SDKs", url: "#sdks" },
-    ],
-  },
-  {
-    title: "Support",
-    icon: Settings,
-    subItems: [
-      { title: "FAQ", url: "#faq" },
-      { title: "Contact Us", url: "#contact-us" },
-    ],
-  },
-];
+// Updated sample data
+const data = {
+  navMain: [
+    {
+      title: "Get Started",
+      url: "#",
+      items: [
+        {
+          title: "Introduction",
+          url: "/api/introduction",
+        },
+      ],
+    },
+    {
+      title: "API Guide",
+      url: "#",
+      items: [
+        {
+          title: "Create API Key",
+          url: "/api/create-api-key",
+        },
+        {
+          title: "Generate Questions",
+          url: "/api/generate-questions",
+        },
+        {
+          title: "Get Task Status",
+          url: "/api/get-task-status",
+        },
+        {
+          title: "Download CSV",
+          url: "/api/download-csv",
+        },
+      ],
+    },
+    {
+      title: "Building Your Application",
+      url: "#",
+      items: [
+        {
+          title: "Routing",
+          url: "#",
+        },
+        {
+          title: "Data Fetching",
+          url: "#",
+        },
+        {
+          title: "Rendering",
+          url: "#",
+        },
+        {
+          title: "Caching",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "API Reference",
+      url: "#",
+      items: [
+        {
+          title: "Components",
+          url: "#",
+        },
+        {
+          title: "File Conventions",
+          url: "#",
+        },
+        {
+          title: "Functions",
+          url: "#",
+        },
+      ],
+    },
+  ],
+};
 
 export default function ApiSidebar() {
-  const [openSections, setOpenSections] = useState<string[]>([]);
-
-  const toggleSection = (title: string) => {
-    setOpenSections((prev) =>
-      prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title]
-    );
-  };
-
   return (
     <Sidebar variant="inset" className="top-[--header-height]">
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton size="lg" asChild>
+              <a href="#">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                  <GalleryVerticalEnd className="size-4" />
+                </div>
+                <div className="flex flex-col gap-0.5 leading-none">
+                  <span className="font-semibold">Documentation</span>
+                  <span className="">v1.0.0</span>
+                </div>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>API Documentation</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <Collapsible
-                    open={openSections.includes(item.title)}
-                    onOpenChange={() => toggleSection(item.title)}
-                  >
-                    <CollapsibleTrigger asChild>
-                      <SidebarMenuButton>
-                        <item.icon className="mr-2 h-4 w-4" />
-                        <span>{item.title}</span>
-                        <ChevronDown className="ml-auto h-4 w-4 transition-transform duration-200" />
-                      </SidebarMenuButton>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent asChild>
+          <SidebarMenu>
+            {data.navMain.map((item, index) => (
+              <Collapsible
+                key={item.title}
+                defaultOpen={index === 0 || index === 1}
+                className="group/collapsible"
+              >
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton>
+                      {item.title}{" "}
+                      <Plus className="ml-auto group-data-[state=open]/collapsible:hidden" />
+                      <Minus className="ml-auto group-data-[state=closed]/collapsible:hidden" />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  {item.items?.length ? (
+                    <CollapsibleContent>
                       <SidebarMenuSub>
-                        {item.subItems.map((subItem) => (
-                          <SidebarMenuSubItem key={subItem.title}>
+                        {item.items.map((item) => (
+                          <SidebarMenuSubItem key={item.title}>
                             <SidebarMenuSubButton asChild>
-                              <a href={subItem.url}>{subItem.title}</a>
+                              <a href={item.url}>{item.title}</a>
                             </SidebarMenuSubButton>
                           </SidebarMenuSubItem>
                         ))}
                       </SidebarMenuSub>
                     </CollapsibleContent>
-                  </Collapsible>
+                  ) : null}
                 </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
+              </Collapsible>
+            ))}
+          </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarRail />
     </Sidebar>
   );
 }

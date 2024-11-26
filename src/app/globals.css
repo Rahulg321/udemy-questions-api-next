@@ -170,6 +170,11 @@ span {
   width: min(90%, 42.5rem);
 }
 
+.anchor:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .block-space {
   padding-block: min(12vh, 17rem);
 }

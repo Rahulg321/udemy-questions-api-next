@@ -1,11 +1,15 @@
 "use client";
 
+import React from "react";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Copy } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+
 import { cn } from "@/lib/utils";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { useTheme } from "next-themes";
 
 const codeExamples = {
   cURL: `curl -X POST \\
@@ -27,7 +31,6 @@ headers = {
     'accept': 'application/json',
     'Content-Type': 'application/json'
 }
-
 
 response = requests.post(url, json=payload, headers=headers)
 
@@ -76,8 +79,6 @@ curl_setopt_array($ch, [
         'Content-Type: application/json'
     ]
 ]);
-
-
 
 $response = curl_exec($ch);
 $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -159,7 +160,8 @@ func main() {
 }`,
 };
 
-export default function CreateApiKeyPage() {
+const CreateApiKeyPage = () => {
+  const { theme } = useTheme();
   const [activeTab, setActiveTab] = useState("cURL");
   const [copiedEndpoint, setCopiedEndpoint] = useState<string | null>(null);
   const [userId, setUserId] = useState("");
@@ -167,6 +169,8 @@ export default function CreateApiKeyPage() {
   const [response, setResponse] = useState<any>(null);
   const [error, setError] = useState<any>(null);
   const [validationError, setValidationError] = useState("");
+
+  const syntaxStyle = theme === "dark" ? vscDarkPlus : docco;
 
   const handleCopy = (text: string, endpoint: string) => {
     navigator.clipboard.writeText(text);
@@ -198,6 +202,7 @@ export default function CreateApiKeyPage() {
       );
 
       const data = await res.json();
+
       setResponse({
         code: res.status,
         body: data,
@@ -229,10 +234,9 @@ export default function CreateApiKeyPage() {
   };
 
   return (
-    <div className="">
-      <div className="flex">
-        {/* Main content */}
-        <div className="">
+    <div className="relative  lg:gap-10 xl:grid xl:grid-cols-[1fr_500px]">
+      <div className="mx-auto">
+        <div className="prose prose-invert max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -245,12 +249,14 @@ export default function CreateApiKeyPage() {
             </p>
 
             <div className="space-y-6">
-              <div className="dark:bg-gray-800/50 rounded-lg p-6">
+              <div className="bg-muted dark:bg-gray-800/50 rounded-lg p-6">
                 <div className="flex items-center space-x-2 mb-6">
                   <span className="px-3 py-1 text-sm font-medium bg-blue-500/10 text-blue-400 rounded">
                     POST
                   </span>
-                  <code className="text-gray-300">/api/create-api-key</code>
+                  <code className="dark:text-gray-300">
+                    /api/create-api-key
+                  </code>
                   <button
                     className={cn(
                       "ml-auto px-6 py-2 rounded-lg text-white transition-colors",
@@ -279,7 +285,7 @@ export default function CreateApiKeyPage() {
                       }}
                       placeholder="Enter user ID"
                       className={cn(
-                        "w-full bg-gray-900/50 border rounded-lg px-4 py-2 text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500",
+                        "w-full dark:bg-gray-900/50 border rounded-lg px-4 py-2 text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500",
                         validationError ? "border-red-500" : "border-gray-700"
                       )}
                     />
@@ -294,12 +300,10 @@ export default function CreateApiKeyPage() {
 
               {/* Response Section */}
               {response && (
-                <div className="bg-gray-800/50 rounded-lg overflow-hidden">
+                <div className=" bg-muted dark:bg-gray-800/50 rounded-lg overflow-hidden">
                   <div className="flex items-center justify-between p-4 border-b border-gray-700">
                     <div className="flex items-center gap-3">
-                      <h2 className="text-lg font-medium text-gray-300">
-                        Response
-                      </h2>
+                      <h2 className="text-lg font-medium ">Response</h2>
                       <span
                         className={cn(
                           "text-sm font-medium",
@@ -314,19 +318,17 @@ export default function CreateApiKeyPage() {
                   </div>
 
                   <div className="p-4 border-b border-gray-700">
-                    <h3 className="text-sm font-medium text-gray-400 mb-2">
-                      Response body
-                    </h3>
-                    <pre className="bg-gray-900 rounded p-4 text-gray-300 font-mono text-sm overflow-x-auto">
+                    <h3 className="text-sm font-medium  mb-2">Response body</h3>
+                    <pre className="dark:bg-gray-900 rounded p-4 dark:text-gray-300 font-mono text-sm overflow-x-auto">
                       {JSON.stringify(response.body, null, 2)}
                     </pre>
                   </div>
 
                   <div className="p-4">
-                    <h3 className="text-sm font-medium text-gray-400 mb-2">
+                    <h3 className="text-sm font-medium dark:text-gray-400 mb-2">
                       Response headers
                     </h3>
-                    <pre className="bg-gray-900 rounded p-4 text-gray-300 font-mono text-sm overflow-x-auto">
+                    <pre className="dark:bg-gray-900 rounded p-4  font-mono text-sm overflow-x-auto">
                       {Object.entries(response.headers)
                         .filter(([_, value]) => value)
                         .map(([key, value]) => `${key}: ${value}`)
@@ -338,7 +340,7 @@ export default function CreateApiKeyPage() {
 
               {/* Error Section */}
               {error && (
-                <div className="bg-red-900/20 border border-red-900/50 rounded-lg p-6">
+                <div className=" bg-red-300 dark:bg-red-900/20 border border-red-900/50 rounded-lg p-6">
                   <h3 className="text-lg font-medium text-red-400 mb-4">
                     Error Details
                   </h3>
@@ -389,11 +391,11 @@ export default function CreateApiKeyPage() {
             </div>
           </motion.div>
         </div>
-
-        {/* Right sidebar */}
-        <div className="w-92 fixed right-0 top-16 bottom-0 overflow-y-auto border-l border-gray-800 dark:bg-gray-900/50 ">
-          <div className="sticky top-0 dark:bg-gray-900/95 border-b border-gray-800 p-4">
-            <div className="flex space-x-2">
+      </div>
+      <div className="hidden text-sm xl:block border-l-2 px-2">
+        <div className="sticky top-32 -mt-6 h-[calc(100vh-3.5rem)]">
+          <div className="no-scrollbar h-full overflow-auto pb-10">
+            <div className="flex space-x-2 ">
               {["cURL", "Python", "JavaScript", "PHP", "Go"].map((lang) => (
                 <button
                   key={lang}
@@ -409,71 +411,22 @@ export default function CreateApiKeyPage() {
                 </button>
               ))}
             </div>
-          </div>
-
-          <div className="p-6 space-y-6">
-            {/* Request Example */}
-            <div className="relative">
-              <div className="absolute right-3 top-3">
-                <button
-                  onClick={() =>
-                    handleCopy(
-                      codeExamples[activeTab as keyof typeof codeExamples],
-                      "request"
-                    )
-                  }
-                  className="p-2 hover:bg-gray-800 rounded-md transition-colors"
-                >
-                  <Copy
-                    className={`w-4 h-4 ${
-                      copiedEndpoint === "request"
-                        ? "text-green-400"
-                        : "text-gray-400"
-                    }`}
-                  />
-                </button>
-              </div>
-              <SyntaxHighlighter
-                language={
-                  activeTab === "cURL" ? "bash" : activeTab.toLowerCase()
-                }
-                style={vscDarkPlus}
-                customStyle={{
-                  background: "rgb(17 24 39 / 0.5)",
-                  padding: "1rem",
-                  borderRadius: "0.5rem",
-                  border: "1px solid rgb(31 41 55)",
-                }}
-              >
-                {codeExamples[activeTab as keyof typeof codeExamples]}
-              </SyntaxHighlighter>
-            </div>
-
-            {/* Response Example */}
-            <div>
-              <h3 className="text-sm font-medium text-gray-400 mb-3">
-                Example Response
-              </h3>
+            <div className="p-6 space-y-6">
+              {/* Request Example */}
               <div className="relative">
                 <div className="absolute right-3 top-3">
                   <button
                     onClick={() =>
                       handleCopy(
-                        JSON.stringify(
-                          {
-                            api_key: "sk_test_abc123xyz456...",
-                          },
-                          null,
-                          2
-                        ),
-                        "example"
+                        codeExamples[activeTab as keyof typeof codeExamples],
+                        "request"
                       )
                     }
-                    className="p-2 hover:bg-gray-800 rounded-md transition-colors"
+                    className="p-2 hover:text-black hover:bg-gray-200 dark:hover:bg-gray-800 rounded-md transition-colors"
                   >
                     <Copy
                       className={`w-4 h-4 ${
-                        copiedEndpoint === "example"
+                        copiedEndpoint === "request"
                           ? "text-green-400"
                           : "text-gray-400"
                       }`}
@@ -481,23 +434,79 @@ export default function CreateApiKeyPage() {
                   </button>
                 </div>
                 <SyntaxHighlighter
-                  language="json"
-                  style={vscDarkPlus}
+                  language={
+                    activeTab === "cURL" ? "bash" : activeTab.toLowerCase()
+                  }
+                  style={syntaxStyle}
                   customStyle={{
-                    background: "rgb(17 24 39 / 0.5)",
+                    background:
+                      theme === "dark" ? "rgb(17 24 39 / 0.5)" : "#f5f5f5",
                     padding: "1rem",
                     borderRadius: "0.5rem",
-                    border: "1px solid rgb(31 41 55)",
+                    border:
+                      theme === "dark"
+                        ? "1px solid rgb(31 41 55)"
+                        : "1px solid #ddd",
                   }}
                 >
-                  {JSON.stringify(
-                    {
-                      api_key: "sk_test_abc123xyz456...",
-                    },
-                    null,
-                    2
-                  )}
+                  {codeExamples[activeTab as keyof typeof codeExamples]}
                 </SyntaxHighlighter>
+              </div>
+
+              {/* Response Example */}
+              <div>
+                <h3 className="text-sm font-medium text-gray-400 mb-3">
+                  Example Response
+                </h3>
+                <div className="relative">
+                  <div className="absolute right-3 top-3">
+                    <button
+                      onClick={() =>
+                        handleCopy(
+                          JSON.stringify(
+                            {
+                              api_key: "sk_test_abc123xyz456...",
+                            },
+                            null,
+                            2
+                          ),
+                          "example"
+                        )
+                      }
+                      className="p-2 hover:text-black hover:bg-gray-200 dark:hover:bg-gray-800 rounded-md transition-colors"
+                    >
+                      <Copy
+                        className={`w-4 h-4 ${
+                          copiedEndpoint === "example"
+                            ? "text-green-400"
+                            : "text-gray-400"
+                        }`}
+                      />
+                    </button>
+                  </div>
+                  <SyntaxHighlighter
+                    language="json"
+                    style={syntaxStyle}
+                    customStyle={{
+                      background:
+                        theme === "dark" ? "rgb(17 24 39 / 0.5)" : "#f5f5f5",
+                      padding: "1rem",
+                      borderRadius: "0.5rem",
+                      border:
+                        theme === "dark"
+                          ? "1px solid rgb(31 41 55)"
+                          : "1px solid #ddd",
+                    }}
+                  >
+                    {JSON.stringify(
+                      {
+                        api_key: "sk_test_abc123xyz456...",
+                      },
+                      null,
+                      2
+                    )}
+                  </SyntaxHighlighter>
+                </div>
               </div>
             </div>
           </div>
@@ -505,4 +514,6 @@ export default function CreateApiKeyPage() {
       </div>
     </div>
   );
-}
+};
+
+export default CreateApiKeyPage;
