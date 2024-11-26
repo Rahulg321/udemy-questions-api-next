@@ -1,4 +1,14 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+"use client";
+
+import {
+  Calendar,
+  ChevronDown,
+  Home,
+  Inbox,
+  Search,
+  Settings,
+} from "lucide-react";
+import { useState } from "react";
 
 import {
   Sidebar,
@@ -9,59 +19,103 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton,
 } from "@/components/ui/sidebar";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
-// Menu items.
+// Menu items with nested structure
 const items = [
   {
-    title: "Home",
-    url: "#",
+    title: "Get Started",
     icon: Home,
+    subItems: [
+      { title: "Introduction", url: "#introduction" },
+      { title: "Installation", url: "#installation" },
+    ],
   },
   {
-    title: "Inbox",
-    url: "#",
+    title: "Endpoints",
     icon: Inbox,
+    subItems: [
+      { title: "Create API Key", url: "#create-api-key" },
+      { title: "Generate Questions", url: "#generate-questions" },
+      { title: "Get Task Status", url: "#get-task-status" },
+      { title: "Download CSV", url: "#download-csv" },
+    ],
   },
   {
-    title: "Calendar",
-    url: "#",
+    title: "Guides",
     icon: Calendar,
+    subItems: [
+      { title: "Authentication", url: "#authentication" },
+      { title: "Error Handling", url: "#error-handling" },
+    ],
   },
   {
-    title: "Search",
-    url: "#",
+    title: "Resources",
     icon: Search,
+    subItems: [
+      { title: "API Reference", url: "#api-reference" },
+      { title: "SDKs", url: "#sdks" },
+    ],
   },
   {
-    title: "Settings",
-    url: "#",
+    title: "Support",
     icon: Settings,
+    subItems: [
+      { title: "FAQ", url: "#faq" },
+      { title: "Contact Us", url: "#contact-us" },
+    ],
   },
 ];
 
 export default function DocsSidebar() {
+  const [openSections, setOpenSections] = useState<string[]>([]);
+
+  const toggleSection = (title: string) => {
+    setOpenSections((prev) =>
+      prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title]
+    );
+  };
+
   return (
-    <Sidebar
-      variant="inset"
-      className="top-[--header-height]"
-      //   style={{
-      //     marginTop: "4rem",
-      //   }}
-    >
+    <Sidebar variant="inset" className="top-[--header-height]">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel>API Documentation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
+                  <Collapsible
+                    open={openSections.includes(item.title)}
+                    onOpenChange={() => toggleSection(item.title)}
+                  >
+                    <CollapsibleTrigger asChild>
+                      <SidebarMenuButton>
+                        <item.icon className="mr-2 h-4 w-4" />
+                        <span>{item.title}</span>
+                        <ChevronDown className="ml-auto h-4 w-4 transition-transform duration-200" />
+                      </SidebarMenuButton>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent asChild>
+                      <SidebarMenuSub>
+                        {item.subItems.map((subItem) => (
+                          <SidebarMenuSubItem key={subItem.title}>
+                            <SidebarMenuSubButton asChild>
+                              <a href={subItem.url}>{subItem.title}</a>
+                            </SidebarMenuSubButton>
+                          </SidebarMenuSubItem>
+                        ))}
+                      </SidebarMenuSub>
+                    </CollapsibleContent>
+                  </Collapsible>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>

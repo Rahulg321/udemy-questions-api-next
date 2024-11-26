@@ -99,13 +99,7 @@ export default function ApiSection() {
   );
 
   return (
-    <section className="relative bg-gray-900 py-20">
-      {/* Background gradients */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-900 to-gray-900" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-500/10 via-transparent to-transparent" />
-      </div>
-
+    <section className="relative py-20">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}
@@ -119,7 +113,7 @@ export default function ApiSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold text-white mb-4"
+            className="text-4xl md:text-6xl font-bold  mb-4"
           >
             Finally, a course creator API
             <br />
@@ -152,19 +146,17 @@ export default function ApiSection() {
                 transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
                 className="relative group"
               >
-                <div className="absolute -inset-px bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl opacity-50 group-hover:opacity-100 blur transition duration-1000 group-hover:duration-200" />
-
-                <div className="relative bg-gray-900 rounded-lg p-6 h-full">
-                  <h3 className="text-xl font-semibold text-white mb-2">
+                <div className="relative bg-muted dark:bg-gray-900 rounded-lg p-6 h-full">
+                  <h3 className="text-xl font-semibold  mb-2">
                     {endpoint.title}
                   </h3>
-                  <p className="text-gray-400 mb-4">{endpoint.description}</p>
+                  <p className=" mb-4">{endpoint.description}</p>
 
                   <div className="flex items-center space-x-2 mb-4">
                     <span className="px-2 py-1 rounded text-sm font-medium bg-blue-500/10 text-blue-400">
                       {endpoint.method}
                     </span>
-                    <code className="text-gray-400 font-mono text-sm">
+                    <code className="dark:text-gray-400 font-mono text-sm">
                       {endpoint.endpoint}
                     </code>
                   </div>
@@ -173,7 +165,7 @@ export default function ApiSection() {
                     <div className="absolute right-4 top-4 flex items-center space-x-2">
                       <button
                         onClick={() => handleCopy(endpoint.json, index)}
-                        className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"
+                        className="p-2 rounded-lg dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
                         title="Copy to clipboard"
                       >
                         <Copy className="w-4 h-4 text-gray-400" />
@@ -187,15 +179,17 @@ export default function ApiSection() {
                         onClick={() =>
                           handleDownload(endpoint.json, endpoint.endpoint)
                         }
-                        className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"
+                        className="p-2 rounded-lg dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
                         title="Download JSON"
                       >
                         <Download className="w-4 h-4 text-gray-400" />
                       </button>
                     </div>
 
-                    <div className="bg-gray-800 rounded-lg p-4 font-mono text-sm overflow-x-auto">
-                      <pre className="text-gray-300">{endpoint.json}</pre>
+                    <div className=" bg-gray-200 dark:bg-gray-800 rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                      <pre className="dark:text-gray-300 leading-loose">
+                        {endpoint.json}
+                      </pre>
                     </div>
                   </div>
                 </div>
@@ -216,19 +210,17 @@ export default function ApiSection() {
                 transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
                 className="relative group"
               >
-                <div className="absolute -inset-px bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl opacity-50 group-hover:opacity-100 blur transition duration-1000 group-hover:duration-200" />
-
-                <div className="relative bg-gray-900 rounded-lg p-6 h-full">
-                  <h3 className="text-xl font-semibold text-white mb-2">
+                <div className="relative bg-muted dark:bg-gray-900 rounded-lg p-6 h-full">
+                  <h3 className="text-xl font-semibold  mb-2">
                     {endpoint.title}
                   </h3>
-                  <p className="text-gray-400 mb-4">{endpoint.description}</p>
+                  <p className=" mb-4">{endpoint.description}</p>
 
                   <div className="flex items-center space-x-2 mb-4">
                     <span className="px-2 py-1 rounded text-sm font-medium bg-emerald-500/10 text-emerald-400">
                       {endpoint.method}
                     </span>
-                    <code className="text-gray-400 font-mono text-sm">
+                    <code className="dark:text-gray-400 font-mono text-sm">
                       {endpoint.endpoint}
                     </code>
                   </div>
@@ -242,7 +234,7 @@ export default function ApiSection() {
                             index + postEndpoints.length
                           )
                         }
-                        className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"
+                        className="p-2 rounded-lg dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
                         title="Copy to clipboard"
                       >
                         <Copy className="w-4 h-4 text-gray-400" />
@@ -256,15 +248,15 @@ export default function ApiSection() {
                         onClick={() =>
                           handleDownload(endpoint.json, endpoint.endpoint)
                         }
-                        className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"
+                        className="p-2 rounded-lg dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
                         title="Download JSON"
                       >
                         <Download className="w-4 h-4 text-gray-400" />
                       </button>
                     </div>
 
-                    <div className="bg-gray-800 rounded-lg p-4 font-mono text-sm overflow-x-auto">
-                      <pre className="text-gray-300">{endpoint.json}</pre>
+                    <div className=" bg-gray-200 dark:bg-gray-800 rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                      <pre className="leading-loose">{endpoint.json}</pre>
                     </div>
                   </div>
                 </div>

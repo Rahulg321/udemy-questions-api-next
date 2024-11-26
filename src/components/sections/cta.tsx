@@ -5,10 +5,7 @@ import { Sparkles, ArrowRight } from "lucide-react";
 
 export default function CTA() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
-      {/* Animated background gradient */}
-      <div className="absolute inset-0 bg-gradient-radial from-indigo-500/20 via-gray-900 to-gray-900" />
-
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden ">
       {/* Animated particles */}
       {[...Array(20)].map((_, i) => (
         <motion.div
@@ -28,7 +25,7 @@ export default function CTA() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl" />
 
           <motion.h2
-            className="text-5xl md:text-7xl font-bold text-white mb-6 relative"
+            className="text-5xl md:text-7xl font-bold mb-6 relative"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -38,7 +35,7 @@ export default function CTA() {
           </motion.h2>
 
           <motion.p
-            className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto"
+            className="text-xl dark:text-gray-300 mb-12 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -65,7 +62,7 @@ export default function CTA() {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </motion.button>
 
-            <p className="text-gray-400">No credit card required</p>
+            <p className="dark:text-gray-400">No credit card required</p>
           </motion.div>
         </motion.div>
       </div>

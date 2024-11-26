@@ -3,6 +3,16 @@
 @tailwind utilities;
 @layer base {
   :root {
+    --sh-class: #e5c07b; /* Yellow */
+    --sh-identifier: #61afef; /* Blue */
+    --sh-sign: #56b6c2; /* Cyan */
+    --sh-property: #d19a66; /* Orange */
+    --sh-entity: #e06c75; /* Red */
+    --sh-jsxliterals: #c678dd; /* Purple */
+    --sh-string: #98c379; /* Green */
+    --sh-keyword: #c678dd; /* Purple */
+    --sh-comment: #5c6370; /* Gray */
+
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -38,6 +48,11 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
+    --sh-class: #4c97f8;
+    --sh-identifier: white;
+    --sh-keyword: #f47067;
+    --sh-string: #0fa295;
+
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
@@ -101,4 +116,78 @@
   .lead {
     @apply text-xl text-muted-foreground;
   }
+
+  pre,
+  code {
+    @apply rounded-lg leading-snug;
+  }
+}
+
+/* .prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5 {
+  margin-top: 1.5rem;
+}
+
+.prose blockquote {
+  @apply mt-6 border-l-2 pl-6 italic;
+}
+
+pre {
+  @apply mt-8 overflow-scroll overflow-y-auto p-4;
+}
+
+pre,
+code {
+  @apply rounded-lg bg-neutral-900 dark:bg-neutral-900;
+} */
+
+* {
+  font-family: var(--font-geist-sans);
+}
+
+pre,
+code,
+span {
+  line-height: 1.2;
+}
+
+.parent-container {
+  display: grid;
+  min-height: 100dvh;
+  grid-template-rows: auto 1fr auto;
+}
+
+.big-container {
+  margin-inline: auto;
+  width: min(90%, 70.5rem);
+}
+
+.narrow-container {
+  margin-inline: auto;
+  width: min(90%, 42.5rem);
+}
+
+.block-space {
+  padding-block: min(12vh, 17rem);
+}
+
+.block-space-large {
+  padding-block: min(14vh, 20rem);
+}
+
+.block-space-mini {
+  padding-block: min(3vh, 6rem);
+}
+
+.blog-index {
+  display: columns;
+  columns: 3;
+}
+
+.blog-index > * {
+  break-inside: avoid;
+  margin-bottom: 1em;
 }

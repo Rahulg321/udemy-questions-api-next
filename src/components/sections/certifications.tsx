@@ -38,12 +38,7 @@ const techIcons = [
 
 export default function Certifications() {
   return (
-    <section className="relative min-h-screen bg-gray-900 py-20 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-indigo-900/10 to-gray-900" />
-      </div>
-
+    <section className="relative min-h-screenpy-20 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}
@@ -67,7 +62,7 @@ export default function Certifications() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold text-white mb-8"
+            className="text-4xl md:text-6xl font-bold mb-8"
           >
             Practice Tests for
             <br />
@@ -79,7 +74,7 @@ export default function Certifications() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl text-gray-300 max-w-2xl mx-auto mb-16"
+            className="text-xl dark:text-gray-300 max-w-2xl mx-auto mb-16"
           >
             Generate high-quality practice tests for the most in-demand
             certifications across various technologies

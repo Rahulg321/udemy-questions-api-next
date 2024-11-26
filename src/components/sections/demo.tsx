@@ -30,12 +30,7 @@ const steps = [
 
 export default function Demo() {
   return (
-    <section className="relative bg-gray-900 py-20">
-      {/* Background gradients */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-900 to-gray-900">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-500/5 via-transparent to-transparent" />
-      </div>
-
+    <section className="relative  py-20">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}
@@ -59,7 +54,7 @@ export default function Demo() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold text-white mb-8"
+            className="text-4xl md:text-6xl font-bold mb-8"
           >
             Create courses in minutes,
             <br />
@@ -117,9 +112,7 @@ export default function Demo() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="relative group"
               >
-                <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
-
-                <div className="relative flex items-start space-x-6 p-4 rounded-lg group-hover:bg-gray-800/50 transition-colors">
+                <div className="relative flex items-start space-x-6 p-4 rounded-lg  dark:group-hover:bg-gray-800/50 transition-colors">
                   <div className="flex-shrink-0">
                     <div className="w-12 h-12 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold">
                       {step.number}
@@ -127,11 +120,11 @@ export default function Demo() {
                   </div>
 
                   <div className="flex-grow">
-                    <h3 className="text-xl font-semibold text-white mb-2 flex items-center group-hover:text-indigo-400 transition-colors">
+                    <h3 className="text-xl font-semibold  mb-2 flex items-center group-hover:text-indigo-400 transition-colors">
                       {step.title}
                       <ChevronRight className="w-5 h-5 ml-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                     </h3>
-                    <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
+                    <p className="dark:text-gray-400 dark:group-hover:text-gray-300 transition-colors">
                       {step.description}
                     </p>
                   </div>

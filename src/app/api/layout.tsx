@@ -8,7 +8,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     <SidebarProvider>
       <ApiSidebar />
       <SidebarInset className="h-full peer-data-[variant=inset]:min-h-[calc(100svh-theme(spacing.4)-var(--header-height))]">
-        <main>{children}</main>
+        <div className="">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   );

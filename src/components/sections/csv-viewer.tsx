@@ -20,13 +20,7 @@ export default function CsvViewer() {
   };
 
   return (
-    <section className="relative bg-gray-900 pt-4 pb-20">
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-900 to-gray-900" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-500/10 via-transparent to-transparent" />
-        <div className="absolute inset-0 bg-[conic-gradient(from_0deg_at_50%_50%,rgba(99,102,241,0.05)_0deg,transparent_60deg,transparent_300deg,rgba(99,102,241,0.05)_360deg)]" />
-      </div>
-
+    <section className="relative  pt-4 pb-20">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}
@@ -40,7 +34,7 @@ export default function CsvViewer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1 rounded-full  border border-indigo-500/20 text-indigo-400 text-sm mb-6"
           >
             <FileJson className="w-4 h-4" />
             <span>Sample API Response</span>
@@ -83,20 +77,18 @@ export default function CsvViewer() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="w-full bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden shadow-2xl"
+            className="w-full dark:bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden shadow-2xl"
           >
-            <div className="bg-gradient-to-r from-gray-900/80 via-gray-800/80 to-gray-900/80 backdrop-blur-sm px-6 py-4 border-b border-indigo-500/20">
+            <div className=" backdrop-blur-sm px-6 py-4 border-b dark:border-indigo-500/20">
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-lg bg-indigo-500/10">
                   <Sparkles className="w-5 h-5 text-indigo-400" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-white">
+                  <h3 className="text-xl font-semibold ">
                     NVIDIA Certified Associate: AI Infrastructure and Operations
                   </h3>
-                  <p className="text-sm text-gray-400 mt-1">
-                    Practice Test Questions CSV Format
-                  </p>
+                  <p className="text-sm ">Practice Test Questions CSV Format</p>
                 </div>
               </div>
             </div>
@@ -104,8 +96,8 @@ export default function CsvViewer() {
             <div className="overflow-x-auto">
               <div className="h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-indigo-500/50 scrollbar-track-gray-800/50">
                 <table className="w-full border-collapse">
-                  <thead className="sticky top-0 z-10">
-                    <tr className="bg-gradient-to-r from-gray-900/95 via-gray-800/95 to-gray-900/95 backdrop-blur-sm">
+                  <thead className="sticky top-0 z-10 bg-muted dark:bg-gray-800">
+                    <tr className=" backdrop-blur-sm">
                       {columns.map((column, index) => (
                         <th
                           key={index}
@@ -123,11 +115,11 @@ export default function CsvViewer() {
                       ))}
                     </tr>
                   </thead>
-                  <tbody className="bg-gray-800/30 backdrop-blur-sm">
+                  <tbody className="dark:bg-gray-800/30 backdrop-blur-sm">
                     {sampleData.map((row, rowIndex) => (
                       <tr
                         key={rowIndex}
-                        className="hover:bg-indigo-500/5 transition-colors duration-150"
+                        className="dark:hover:bg-indigo-500/5 transition-colors duration-150"
                       >
                         {columns.map((column, colIndex) => (
                           <td
@@ -135,7 +127,7 @@ export default function CsvViewer() {
                             className="border-b border-r border-indigo-500/20 group"
                           >
                             <div
-                              className="px-6 py-6 text-sm text-gray-300 group-hover:text-white transition-colors"
+                              className="px-6 py-6 text-sm"
                               style={{
                                 width: `${columnWidths[column]}px`,
                                 minWidth: `${columnWidths[column]}px`,

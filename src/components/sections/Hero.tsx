@@ -29,9 +29,6 @@ const features = [
 export default function Hero() {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden hero-gradient pt-16">
-      {/* Animated gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/30 via-gray-900/80 to-gray-900" />
-
       {/* Ripple Effect */}
       <Ripple className="z-0" />
 
@@ -54,7 +51,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.h1
-            className="text-5xl md:text-7xl font-bold text-white mb-6"
+            className="text-5xl md:text-7xl font-bold  mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -64,7 +61,7 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p
-            className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
+            className="text-xl mb-8 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -128,7 +125,7 @@ export default function Hero() {
                 </motion.div>
 
                 <motion.p
-                  className="text-gray-300 font-medium mt-4 group-hover:text-indigo-400 transition-colors"
+                  className="font-medium mt-4 group-hover:text-indigo-400 transition-colors"
                   whileHover={{ scale: 1.05 }}
                 >
                   {item.text}
@@ -138,9 +135,6 @@ export default function Hero() {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Smooth transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-gray-900" />
     </section>
   );
 }

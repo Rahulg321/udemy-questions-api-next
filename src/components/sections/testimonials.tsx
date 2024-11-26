@@ -127,9 +127,7 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="relative min-h-screen bg-gray-900 py-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-radial from-indigo-500/20 via-gray-900 to-gray-900" />
-
+    <section className="relative min-h-screen py-20 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}
@@ -143,7 +141,7 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="inline-block px-4 py-1 rounded-full bg-gray-800 text-gray-300 text-sm mb-8"
+            className="inline-block px-4 py-1 rounded-full dark:bg-gray-800 dark:text-gray-300 text-sm mb-8"
           >
             Wall of love
           </motion.span>
@@ -153,7 +151,7 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl font-bold text-white mb-8"
+            className="text-5xl md:text-7xl font-bold dark:text-white mb-8"
           >
             Loved by educators
           </motion.h2>
@@ -170,9 +168,6 @@ export default function Testimonials() {
         </motion.div>
 
         <div className="relative" ref={containerRef}>
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-gray-900 to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-gray-900 to-transparent z-10" />
-
           <div
             className="overflow-hidden"
             onMouseEnter={handleMouseEnter}
@@ -190,7 +185,7 @@ export default function Testimonials() {
                     scale: 1.05,
                     transition: { duration: 0.2 },
                   }}
-                  className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 w-[400px] flex-shrink-0 cursor-pointer hover:border-indigo-500 hover:shadow-lg hover:shadow-indigo-500/20 transition-all"
+                  className="dark:bg-gray-800/50 bg-muted backdrop-blur-sm p-8 rounded-xl border dark:border-gray-700 w-[400px] flex-shrink-0 cursor-pointer hover:border-indigo-500 hover:shadow-lg hover:shadow-indigo-500/20 transition-all"
                 >
                   <div className="flex items-center mb-4">
                     {[...Array(5)].map((_, i) => (
@@ -200,9 +195,7 @@ export default function Testimonials() {
                       />
                     ))}
                   </div>
-                  <p className="text-gray-300 mb-6">
-                    &ldquo;{testimonial.content}&ldquo;
-                  </p>
+                  <p className=" mb-6">&ldquo;{testimonial.content}&ldquo;</p>
                   <div className="flex items-center">
                     <Image
                       src={testimonial.image}
@@ -212,10 +205,8 @@ export default function Testimonials() {
                       className="rounded-full mr-4"
                     />
                     <div>
-                      <h4 className="font-semibold text-white">
-                        {testimonial.name}
-                      </h4>
-                      <p className="text-gray-400">{testimonial.role}</p>
+                      <h4 className="font-semibold ">{testimonial.name}</h4>
+                      <p className="">{testimonial.role}</p>
                     </div>
                   </div>
                 </motion.div>

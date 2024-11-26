@@ -32,10 +32,7 @@ const features = [
 
 export default function Pricing() {
   return (
-    <section className="relative min-h-screen bg-gray-900 py-20 overflow-hidden">
-      {/* Dark background base */}
-      <div className="absolute inset-0 bg-gray-900" />
-
+    <section className="relative min-h-screen  py-20 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -44,10 +41,10 @@ export default function Pricing() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
+          <h2 className="text-4xl md:text-6xl font-bold mb-4">
             We like keeping things simple
           </h2>
-          <p className="text-3xl md:text-5xl text-gray-300 font-semibold">
+          <p className="text-3xl md:text-5xl font-semibold">
             One plan one price.
           </p>
         </motion.div>
@@ -90,12 +87,10 @@ export default function Pricing() {
             className="text-center mb-12"
           >
             <div className="inline-flex items-baseline">
-              <span className="text-7xl md:text-8xl font-bold text-white">
-                $29
-              </span>
-              <span className="text-xl text-gray-400 ml-2">/month</span>
+              <span className="text-7xl md:text-8xl font-bold">$29</span>
+              <span className="text-xl dark:text-gray-400 ml-2">/month</span>
             </div>
-            <p className="text-gray-400 mt-2">(billed annually)</p>
+            <p className="dark:text-gray-400 mt-2">(billed annually)</p>
           </motion.div>
 
           <motion.div
@@ -119,10 +114,8 @@ export default function Pricing() {
                     <Check className="w-5 h-5 text-indigo-400" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-white">
-                      {feature.name}
-                    </h3>
-                    <p className="text-gray-400">{feature.description}</p>
+                    <h3 className="text-lg font-semibold ">{feature.name}</h3>
+                    <p className="dark:text-gray-400">{feature.description}</p>
                   </div>
                 </motion.div>
               ))}
