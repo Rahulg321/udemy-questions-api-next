@@ -31,7 +31,7 @@ export default function Hero() {
   const { theme } = useTheme();
 
   return (
-    <section className="hero-gradient relative flex min-h-[90vh] items-center justify-center overflow-hidden pt-16">
+    <section className="hero-gradient relative flex min-h-[90vh] items-center justify-center overflow-hidden pt-16 dark:bg-gray-900">
       {/* Animated gradient overlay */}
       {theme === "dark" && (
         <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/30 via-gray-900/80 to-gray-900" />

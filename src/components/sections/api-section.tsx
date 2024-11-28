@@ -102,15 +102,7 @@ export default function ApiSection() {
   );
 
   return (
-    <section className="relative py-20">
-      {/* Background gradients */}
-      {theme === "dark" && (
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-900 to-gray-900" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-500/10 via-transparent to-transparent" />
-        </div>
-      )}
-
+    <section className="relative py-20 dark:bg-gray-900">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}
