@@ -1,163 +1,168 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
+import { cn } from "@/lib/utils";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-import clsx from "clsx";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React, { useState } from "react";
-import { MdMenu, MdClose } from "react-icons/md";
-
-import Image from "next/image";
-
+import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ChevronDown } from "lucide-react";
-import { ModeToggle } from "./mode-toggle";
-import { useTheme } from "next-themes";
-import { cn } from "@/lib/utils";
+import {
+  Menu,
+  X,
+  ChevronDown,
+  Code2,
+  CreditCard,
+  Users,
+  Terminal,
+  LogIn,
+  ArrowRight,
+} from "lucide-react";
 
 type NavbarProps = {
-  classname?: string;
+  className?: string;
 };
 
 const desktopNav = [
-  { navlink: "/api", navlabel: "Api" },
-  { navlink: "/pricing", navlabel: "Pricing" },
-  { navlink: "/community", navlabel: "Community" },
+  { navlink: "/api", navlabel: "API", icon: Terminal },
+  { navlink: "/pricing", navlabel: "Pricing", icon: CreditCard },
+  { navlink: "/community", navlabel: "Community", icon: Users },
 ];
 
-const Navbar = ({ classname }: NavbarProps) => {
+export default function Navbar({ className }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const { theme } = useTheme();
 
   return (
-    <>
-      <header
-        className={cn(
-          "z-40 w-full border-b bg-background/80 px-2 py-2 backdrop-blur-sm dark:bg-gray-900/80 md:px-4 lg:px-12",
-          classname,
-          theme === "dark" ? "" : "",
-        )}
-      >
-        <nav aria-label="Main-navigation">
-          <ul className="flex flex-col md:flex-row md:items-center md:justify-between md:rounded-xl">
-            <div className="flex items-center justify-between">
-              <NameLogo />
-              <button
-                aria-label="Open menu"
-                className={clsx(
-                  "block text-2xl text-black dark:text-white md:hidden",
-                  pathname === "/token" || pathname === "/reward"
-                    ? "text-white"
-                    : null,
-                )}
-                onClick={() => setIsOpen(true)}
-              >
-                <MdMenu />
-              </button>
-            </div>
-            <div
-              className={clsx(
-                "fixed bottom-0 left-0 right-0 top-0 z-50 flex flex-col items-end gap-4 bg-black pr-4 pt-14 text-white transition-transform duration-300 ease-in-out md:hidden",
-                isOpen ? "translate-x-0" : "translate-x-[100%]",
-              )}
+    <header
+      className={cn(
+        "sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm transition-colors duration-200",
+        className,
+      )}
+    >
+      <nav className="container mx-auto px-4" aria-label="Main navigation">
+        {/* Desktop Layout */}
+        <div className="relative flex h-16 items-center justify-between lg:justify-normal">
+          {/* Logo - Left */}
+          <div className="flex shrink-0 items-center">
+            <Link
+              href="/"
+              className="flex items-center gap-2 text-xl font-bold"
             >
-              <button
-                aria-label="Close menu"
-                className={clsx(
-                  "fixed right-4 top-3 block p-2 text-2xl text-white md:hidden",
-                  pathname === "/token" || pathname === "/reward"
-                    ? "text-white"
-                    : null,
-                )}
-                onClick={() => setIsOpen(false)}
-              >
-                <MdClose />
-              </button>
-              {desktopNav.map((item, index) => {
+              <Code2 className="h-6 w-6 text-indigo-500" />
+              <span className="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
+                Udemy API Generator
+              </span>
+            </Link>
+          </div>
+
+          {/* Navigation - Center */}
+          <div className="hidden lg:absolute lg:left-1/2 lg:flex lg:-translate-x-1/2">
+            <div className="flex items-center gap-1">
+              {desktopNav.map((item) => {
+                const Icon = item.icon;
                 return (
                   <Link
+                    key={item.navlink}
                     href={item.navlink}
-                    key={index}
-                    onClick={() => {
-                      setIsOpen(false);
-                    }}
-                    className={clsx(
-                      "",
-                      pathname === item.navlink ? "underline" : "",
+                    className={cn(
+                      "group flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors hover:text-indigo-500",
+                      pathname === item.navlink
+                        ? "text-indigo-500"
+                        : "text-muted-foreground",
                     )}
                   >
+                    <Icon className="h-4 w-4 transition-transform group-hover:scale-110" />
                     {item.navlabel}
                   </Link>
                 );
               })}
             </div>
-            <DesktopMenu />
-            {/* if session does not exist user is not logged in and dont show the login and sign up links */}
-            <div className="flex gap-2">
-              <AuthDialogNavs />
-            </div>
-          </ul>
-        </nav>
-      </header>
-    </>
-  );
-};
+          </div>
 
-export default Navbar;
+          {/* Auth Buttons - Right */}
+          <div className="hidden items-center gap-4 lg:ml-auto lg:flex">
+            <Link href="/auth/login">
+              <Button variant="ghost" className="gap-2">
+                <LogIn className="h-4 w-4" />
+                Login
+              </Button>
+            </Link>
+            <Link href="/auth/signup">
+              <Button className="gap-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600">
+                Get Started
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
 
-function NameLogo() {
-  const pathname = usePathname();
-
-  return (
-    <div className="">
-      <Link href="/" aria-label="Home page" className="">
-        Udemy Api Generator
-      </Link>
-    </div>
-  );
-}
-
-function DesktopMenu() {
-  const pathname = usePathname();
-  return (
-    <div className="hidden gap-8 md:flex md:items-center">
-      {desktopNav.map((item, index) => {
-        return (
-          <Link
-            href={item.navlink}
-            key={index}
-            className={clsx(
-              "hover:text-mainC hover:decoration-mainC font-bold transition hover:underline hover:decoration-4 hover:underline-offset-8",
-              pathname === "/token" || pathname === "/reward"
-                ? "text-white"
-                : "",
-              pathname === item.navlink
-                ? "text-mainC underline decoration-4 underline-offset-8"
-                : "",
-            )}
+          {/* Mobile Menu Button */}
+          <button
+            className="rounded-md p-2 text-muted-foreground hover:bg-accent lg:hidden"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
-            {item.navlabel}
-          </Link>
-        );
-      })}
-    </div>
-  );
-}
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
 
-function AuthDialogNavs() {
-  return (
-    <div className="hidden space-x-4 md:flex md:items-center">
-      <Link href={"/auth/login"}>Login</Link>
-    </div>
+        {/* Mobile Navigation */}
+        <div
+          id="mobile-menu"
+          className={cn("lg:hidden", isOpen ? "block" : "hidden")}
+        >
+          <div className="border-t py-4">
+            <div className="flex flex-col space-y-3">
+              {desktopNav.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.navlink}
+                    href={item.navlink}
+                    className={cn(
+                      "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:text-indigo-500",
+                      pathname === item.navlink
+                        ? "text-indigo-500"
+                        : "text-muted-foreground",
+                    )}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <Icon className="h-4 w-4" />
+                    {item.navlabel}
+                  </Link>
+                );
+              })}
+              <div className="space-y-3 border-t pt-4">
+                <Link
+                  href="/auth/login"
+                  className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-indigo-500"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <LogIn className="h-4 w-4" />
+                  Login
+                </Link>
+                <Link href="/auth/signup" onClick={() => setIsOpen(false)}>
+                  <Button className="w-full gap-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600">
+                    Get Started
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
   );
 }
 
@@ -166,16 +171,16 @@ function ProfileMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger className="flex items-center gap-2">
         <Avatar>
-          <AvatarImage src={"https://github.com/shadcn.png"} alt="@shadcn" />
+          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
           <AvatarFallback>HN</AvatarFallback>
         </Avatar>
-        <span className="text-baseC flex items-center font-medium">
-          Account <ChevronDown />
+        <span className="flex items-center font-medium">
+          Account <ChevronDown className="ml-1 h-4 w-4" />
         </span>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent align="end">
         <DropdownMenuItem asChild>
-          <Link href={`/profile/`}>Profile</Link>
+          <Link href="/profile">Profile</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>Logout</DropdownMenuItem>
