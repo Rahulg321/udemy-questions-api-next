@@ -44,7 +44,7 @@ export default function Navbar({ className }: NavbarProps) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm transition-colors duration-200",
+        "sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm transition-colors duration-200 dark:bg-gray-900/80",
         className,
       )}
     >

@@ -198,7 +198,7 @@ const CreateApiKeyPage = () => {
             Accept: "application/json",
           },
           body: JSON.stringify({ user_id: userId }),
-        }
+        },
       );
 
       const data = await res.json();
@@ -234,24 +234,24 @@ const CreateApiKeyPage = () => {
   };
 
   return (
-    <div className="relative  lg:gap-10 xl:grid xl:grid-cols-[1fr_500px]">
+    <div className="relative lg:gap-10 xl:grid xl:grid-cols-[1fr_500px]">
       <div className="mx-auto">
-        <div className="prose prose-invert max-w-3xl mx-auto">
+        <div className="prose prose-invert mx-auto max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-4xl font-bold  mb-4">Create API Key</h1>
-            <p className="text-xl  mb-8">
+            <h1 className="mb-4 text-4xl font-bold">Create API Key</h1>
+            <p className="mb-8 text-xl">
               Generate a new API key for accessing the course creation
               endpoints.
             </p>
 
             <div className="space-y-6">
-              <div className="bg-muted dark:bg-gray-800/50 rounded-lg p-6">
-                <div className="flex items-center space-x-2 mb-6">
-                  <span className="px-3 py-1 text-sm font-medium bg-blue-500/10 text-blue-400 rounded">
+              <div className="rounded-lg bg-muted p-6 dark:bg-gray-800/50">
+                <div className="mb-6 flex items-center space-x-2">
+                  <span className="rounded bg-blue-500/10 px-3 py-1 text-sm font-medium text-blue-400">
                     POST
                   </span>
                   <code className="dark:text-gray-300">
@@ -259,10 +259,10 @@ const CreateApiKeyPage = () => {
                   </code>
                   <button
                     className={cn(
-                      "ml-auto px-6 py-2 rounded-lg text-white transition-colors",
+                      "ml-auto rounded-lg px-6 py-2 text-white transition-colors",
                       isLoading
-                        ? "bg-gray-700 cursor-not-allowed"
-                        : "bg-indigo-600 hover:bg-indigo-700"
+                        ? "cursor-not-allowed bg-gray-700"
+                        : "bg-indigo-600 hover:bg-indigo-700",
                     )}
                     onClick={handleSend}
                     disabled={isLoading}
@@ -273,7 +273,7 @@ const CreateApiKeyPage = () => {
 
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-gray-400 mb-2">
+                    <label className="mb-2 block text-gray-400">
                       User ID <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -285,8 +285,8 @@ const CreateApiKeyPage = () => {
                       }}
                       placeholder="Enter user ID"
                       className={cn(
-                        "w-full dark:bg-gray-900/50 border rounded-lg px-4 py-2 text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500",
-                        validationError ? "border-red-500" : "border-gray-700"
+                        "w-full rounded-lg border px-4 py-2 text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-900/50",
+                        validationError ? "border-red-500" : "border-gray-700",
                       )}
                     />
                     {validationError && (
@@ -300,16 +300,16 @@ const CreateApiKeyPage = () => {
 
               {/* Response Section */}
               {response && (
-                <div className=" bg-muted dark:bg-gray-800/50 rounded-lg overflow-hidden">
-                  <div className="flex items-center justify-between p-4 border-b border-gray-700">
+                <div className="overflow-hidden rounded-lg bg-muted dark:bg-gray-800/50">
+                  <div className="flex items-center justify-between border-b border-gray-700 p-4">
                     <div className="flex items-center gap-3">
-                      <h2 className="text-lg font-medium ">Response</h2>
+                      <h2 className="text-lg font-medium">Response</h2>
                       <span
                         className={cn(
                           "text-sm font-medium",
                           response.code >= 200 && response.code < 300
                             ? "text-emerald-400"
-                            : "text-red-400"
+                            : "text-red-400",
                         )}
                       >
                         {response.code}
@@ -317,18 +317,18 @@ const CreateApiKeyPage = () => {
                     </div>
                   </div>
 
-                  <div className="p-4 border-b border-gray-700">
-                    <h3 className="text-sm font-medium  mb-2">Response body</h3>
-                    <pre className="dark:bg-gray-900 rounded p-4 dark:text-gray-300 font-mono text-sm overflow-x-auto">
+                  <div className="border-b border-gray-700 p-4">
+                    <h3 className="mb-2 text-sm font-medium">Response body</h3>
+                    <pre className="overflow-x-auto rounded p-4 font-mono text-sm dark:bg-gray-900 dark:text-gray-300">
                       {JSON.stringify(response.body, null, 2)}
                     </pre>
                   </div>
 
                   <div className="p-4">
-                    <h3 className="text-sm font-medium dark:text-gray-400 mb-2">
+                    <h3 className="mb-2 text-sm font-medium dark:text-gray-400">
                       Response headers
                     </h3>
-                    <pre className="dark:bg-gray-900 rounded p-4  font-mono text-sm overflow-x-auto">
+                    <pre className="overflow-x-auto rounded p-4 font-mono text-sm dark:bg-gray-900">
                       {Object.entries(response.headers)
                         .filter(([_, value]) => value)
                         .map(([key, value]) => `${key}: ${value}`)
@@ -340,8 +340,8 @@ const CreateApiKeyPage = () => {
 
               {/* Error Section */}
               {error && (
-                <div className=" bg-red-300 dark:bg-red-900/20 border border-red-900/50 rounded-lg p-6">
-                  <h3 className="text-lg font-medium text-red-400 mb-4">
+                <div className="rounded-lg border border-red-900/50 bg-red-300 p-6 dark:bg-red-900/20">
+                  <h3 className="mb-4 text-lg font-medium text-red-400">
                     Error Details
                   </h3>
                   <div className="space-y-4 text-sm text-gray-300">
@@ -356,7 +356,7 @@ const CreateApiKeyPage = () => {
                     {error.stack && (
                       <div>
                         <span className="text-red-400">Stack Trace:</span>
-                        <pre className="mt-2 p-4 bg-gray-900/50 rounded-lg overflow-x-auto">
+                        <pre className="mt-2 overflow-x-auto rounded-lg bg-gray-900/50 p-4">
                           {error.stack}
                         </pre>
                       </div>
@@ -364,11 +364,11 @@ const CreateApiKeyPage = () => {
                     {error.possibleCauses && (
                       <div>
                         <span className="text-red-400">Possible Causes:</span>
-                        <ul className="mt-2 list-disc list-inside">
+                        <ul className="mt-2 list-inside list-disc">
                           {error.possibleCauses.map(
                             (cause: string, i: number) => (
                               <li key={i}>{cause}</li>
-                            )
+                            ),
                           )}
                         </ul>
                       </div>
@@ -376,11 +376,11 @@ const CreateApiKeyPage = () => {
                     {error.suggestions && (
                       <div>
                         <span className="text-red-400">Suggestions:</span>
-                        <ul className="mt-2 list-disc list-inside">
+                        <ul className="mt-2 list-inside list-disc">
                           {error.suggestions.map(
                             (suggestion: string, i: number) => (
                               <li key={i}>{suggestion}</li>
-                            )
+                            ),
                           )}
                         </ul>
                       </div>
@@ -392,26 +392,26 @@ const CreateApiKeyPage = () => {
           </motion.div>
         </div>
       </div>
-      <div className="hidden text-sm xl:block border-l-2 px-2">
-        <div className="sticky top-32 -mt-6 h-[calc(100vh-3.5rem)]">
+      <div className="hidden border-l-2 px-2 text-sm xl:block">
+        <div className="sticky top-32 mt-2 h-[calc(100vh-3.5rem)]">
           <div className="no-scrollbar h-full overflow-auto pb-10">
-            <div className="flex space-x-2 ">
+            <div className="flex space-x-2">
               {["cURL", "Python", "JavaScript", "PHP", "Go"].map((lang) => (
                 <button
                   key={lang}
                   onClick={() => setActiveTab(lang)}
                   className={cn(
-                    "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
+                    "rounded-lg px-4 py-2 text-sm font-medium transition-colors",
                     activeTab === lang
                       ? "bg-indigo-600 text-white"
-                      : "text-gray-400 hover:text-white hover:bg-gray-800"
+                      : "text-gray-400 hover:bg-gray-800 hover:text-white",
                   )}
                 >
                   {lang}
                 </button>
               ))}
             </div>
-            <div className="p-6 space-y-6">
+            <div className="space-y-6 p-6">
               {/* Request Example */}
               <div className="relative">
                 <div className="absolute right-3 top-3">
@@ -419,13 +419,13 @@ const CreateApiKeyPage = () => {
                     onClick={() =>
                       handleCopy(
                         codeExamples[activeTab as keyof typeof codeExamples],
-                        "request"
+                        "request",
                       )
                     }
-                    className="p-2 hover:text-black hover:bg-gray-200 dark:hover:bg-gray-800 rounded-md transition-colors"
+                    className="rounded-md p-2 transition-colors hover:bg-gray-200 hover:text-black dark:hover:bg-gray-800"
                   >
                     <Copy
-                      className={`w-4 h-4 ${
+                      className={`h-4 w-4 ${
                         copiedEndpoint === "request"
                           ? "text-green-400"
                           : "text-gray-400"
@@ -455,7 +455,7 @@ const CreateApiKeyPage = () => {
 
               {/* Response Example */}
               <div>
-                <h3 className="text-sm font-medium text-gray-400 mb-3">
+                <h3 className="mb-3 text-sm font-medium text-gray-400">
                   Example Response
                 </h3>
                 <div className="relative">
@@ -468,15 +468,15 @@ const CreateApiKeyPage = () => {
                               api_key: "sk_test_abc123xyz456...",
                             },
                             null,
-                            2
+                            2,
                           ),
-                          "example"
+                          "example",
                         )
                       }
-                      className="p-2 hover:text-black hover:bg-gray-200 dark:hover:bg-gray-800 rounded-md transition-colors"
+                      className="rounded-md p-2 transition-colors hover:bg-gray-200 hover:text-black dark:hover:bg-gray-800"
                     >
                       <Copy
-                        className={`w-4 h-4 ${
+                        className={`h-4 w-4 ${
                           copiedEndpoint === "example"
                             ? "text-green-400"
                             : "text-gray-400"
@@ -503,7 +503,7 @@ const CreateApiKeyPage = () => {
                         api_key: "sk_test_abc123xyz456...",
                       },
                       null,
-                      2
+                      2,
                     )}
                   </SyntaxHighlighter>
                 </div>

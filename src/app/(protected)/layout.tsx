@@ -23,6 +23,8 @@ export const metadata: Metadata = {
 
 const HEADER_HEIGHT = "4rem";
 
+const FOOTER_HEIGHT = "4rem";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -35,6 +37,7 @@ export default function RootLayout({
         style={
           {
             "--header-height": HEADER_HEIGHT,
+            "--footer-height": FOOTER_HEIGHT,
           } as React.CSSProperties
         }
       >
@@ -44,7 +47,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar classname="sticky top-0 h-[--header-height] shrink-0" />
+          <Navbar />
           {children}
           <Footer />
         </ThemeProvider>

@@ -88,14 +88,14 @@ const ApiIntroductionPage = () => {
     <div className="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
       {/* Main content */}
       <div className="mx-auto">
-        <div className="prose prose-invert max-w-3xl mx-auto">
+        <div className="prose prose-invert mx-auto max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-4xl font-bold mb-4">Introduction</h1>
-            <p className="text-xl  mb-12">
+            <h1 className="mb-4 text-4xl font-bold">Introduction</h1>
+            <p className="mb-12 text-xl">
               Welcome to Course Generator API, a developer-friendly course
               creation platform.
             </p>
@@ -110,23 +110,23 @@ const ApiIntroductionPage = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="mb-12"
             >
-              <h2 className="flex items-center gap-2 text-2xl font-semibold mb-4">
-                <section.icon className="w-6 h-6 text-indigo-400" />
+              <h2 className="mb-4 flex items-center gap-2 text-2xl font-semibold">
+                <section.icon className="h-6 w-6 text-indigo-400" />
                 {section.title}
               </h2>
 
               {section.content && (
-                <div className=" space-y-4">
+                <div className="space-y-4">
                   {section.content.split("\n\n").map((paragraph, i) => (
                     <div key={i}>
                       {paragraph.startsWith("-") ? (
-                        <ul className="list-disc list-inside space-y-2 ml-4">
+                        <ul className="ml-4 list-inside list-disc space-y-2">
                           {paragraph.split("\n").map((item, j) => (
                             <li key={j}>{item.replace("- ", "")}</li>
                           ))}
                         </ul>
                       ) : paragraph.match(/^\d\./) ? (
-                        <ol className="list-decimal list-inside space-y-2 ml-4">
+                        <ol className="ml-4 list-inside list-decimal space-y-2">
                           {paragraph.split("\n").map((item, j) => (
                             <li key={j}>{item.replace(/^\d\.\s/, "")}</li>
                           ))}
@@ -141,13 +141,13 @@ const ApiIntroductionPage = () => {
 
               {section.codeExample && (
                 <div className="mt-6">
-                  <h3 className="text-lg font-medium  mb-2">
+                  <h3 className="mb-2 text-lg font-medium">
                     {section.codeExample.title}
                   </h3>
-                  <p className="text-gray-400 mb-4">
+                  <p className="mb-4 text-gray-400">
                     {section.codeExample.description}
                   </p>
-                  <div className="relative group bg-muted">
+                  <div className="group relative bg-muted">
                     <div className="relative">
                       <div className="absolute right-4 top-4 z-10">
                         <button
@@ -155,17 +155,17 @@ const ApiIntroductionPage = () => {
                             handleCopyCode(section.codeExample.code)
                           }
                           className={cn(
-                            "p-2 rounded-lg transition-colors",
+                            "rounded-lg p-2 transition-colors",
                             copiedCode
                               ? "bg-green-500/20 text-green-400"
-                              : "dark:bg-gray-800/50 text-gray-400 hover:bg-gray-400 hover:text-black dark:hover:bg-gray-800"
+                              : "text-gray-400 hover:bg-gray-400 hover:text-black dark:bg-gray-800/50 dark:hover:bg-gray-800",
                           )}
                         >
-                          <Copy className="w-4 h-4" />
+                          <Copy className="h-4 w-4" />
                         </button>
                       </div>
-                      <pre className="relative dark:bg-gray-900/75 backdrop-blur-sm rounded-lg p-6 overflow-x-auto border border-gray-800">
-                        <code className="dark:text-gray-300 text-sm">
+                      <pre className="relative overflow-x-auto rounded-lg border border-gray-800 p-6 backdrop-blur-sm dark:bg-gray-900/75">
+                        <code className="text-sm dark:text-gray-300">
                           {section.codeExample.code}
                         </code>
                       </pre>
@@ -177,25 +177,25 @@ const ApiIntroductionPage = () => {
           ))}
         </div>
       </div>
-      <div className="hidden text-sm xl:block">
-        <div className="sticky top-24 -mt-6 h-[calc(100vh-3.5rem)] pt-4">
+      <div className="hidden border-l-2 text-sm xl:block">
+        <div className="sticky top-24 h-[calc(100vh-3.5rem)] px-4">
           <div className="no-scrollbar h-full overflow-auto pb-10">
             <p>On this page</p>
-            <nav className="space-y-4 mt-4">
+            <nav className="mt-4 space-y-4">
               <Link
                 href="/api/introduction#Overview"
-                className="block group hover:text-blue-500 transition-colors duration-200"
+                className="group block transition-colors duration-200 hover:text-blue-500"
               >
-                <span className="group-hover:scale-125 transition-transform duration-200">
+                <span className="transition-transform duration-200 group-hover:scale-125">
                   ✨
                 </span>
                 <span className="ml-1 group-hover:underline">Overview</span>
               </Link>
               <Link
                 href="/api/introduction#getting-started"
-                className="block group hover:text-blue-500 transition-colors duration-200"
+                className="group block transition-colors duration-200 hover:text-blue-500"
               >
-                <span className="group-hover:scale-125 transition-transform duration-200">
+                <span className="transition-transform duration-200 group-hover:scale-125">
                   🚀
                 </span>
                 <span className="ml-1 group-hover:underline">
@@ -204,9 +204,9 @@ const ApiIntroductionPage = () => {
               </Link>
               <Link
                 href="/api/introduction#Examples"
-                className="block group hover:text-blue-500 transition-colors duration-200"
+                className="group block transition-colors duration-200 hover:text-blue-500"
               >
-                <span className="group-hover:scale-125 transition-transform duration-200">
+                <span className="transition-transform duration-200 group-hover:scale-125">
                   👩‍💻
                 </span>
                 <span className="ml-1 group-hover:underline">Examples</span>

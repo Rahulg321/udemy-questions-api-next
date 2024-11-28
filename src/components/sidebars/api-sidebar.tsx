@@ -114,7 +114,10 @@ const data = {
 
 export default function ApiSidebar() {
   return (
-    <Sidebar variant="inset" className="top-[--header-height]">
+    <Sidebar
+      variant="inset"
+      className="bottom-[--footer-height] top-[--header-height]"
+    >
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
