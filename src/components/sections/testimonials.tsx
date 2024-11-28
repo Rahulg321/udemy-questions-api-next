@@ -4,6 +4,7 @@ import { motion, useAnimationControls } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Star } from "lucide-react";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 
 const testimonials = [
   {
@@ -126,22 +127,27 @@ export default function Testimonials() {
     }
   };
 
+  const { theme } = useTheme();
+
   return (
-    <section className="relative min-h-screen py-20 overflow-hidden">
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative min-h-screen overflow-hidden py-20 dark:bg-gray-900">
+      {theme === "dark" && (
+        <div className="bg-gradient-radial absolute inset-0 from-indigo-500/20 via-gray-900 to-gray-900" />
+      )}
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="mb-16 text-center"
         >
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="inline-block px-4 py-1 rounded-full dark:bg-gray-800 dark:text-gray-300 text-sm mb-8"
+            className="mb-8 inline-block rounded-full px-4 py-1 text-sm dark:bg-gray-800 dark:text-gray-300"
           >
             Wall of love
           </motion.span>
@@ -151,7 +157,7 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl font-bold dark:text-white mb-8"
+            className="mb-8 text-5xl font-bold dark:text-white md:text-7xl"
           >
             Loved by educators
           </motion.h2>
@@ -161,7 +167,7 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl text-gray-300 max-w-2xl mx-auto mb-16"
+            className="mx-auto mb-16 max-w-2xl text-xl text-gray-300"
           >
             Here&apos;s what course creators are saying about our platform
           </motion.p>
@@ -185,27 +191,27 @@ export default function Testimonials() {
                     scale: 1.05,
                     transition: { duration: 0.2 },
                   }}
-                  className="dark:bg-gray-800/50 bg-muted backdrop-blur-sm p-8 rounded-xl border dark:border-gray-700 w-[400px] flex-shrink-0 cursor-pointer hover:border-indigo-500 hover:shadow-lg hover:shadow-indigo-500/20 transition-all"
+                  className="w-[400px] flex-shrink-0 cursor-pointer rounded-xl border bg-muted p-8 backdrop-blur-sm transition-all hover:border-indigo-500 hover:shadow-lg hover:shadow-indigo-500/20 dark:border-gray-700 dark:bg-gray-800/50"
                 >
-                  <div className="flex items-center mb-4">
+                  <div className="mb-4 flex items-center">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className="w-5 h-5 text-yellow-500 fill-current"
+                        className="h-5 w-5 fill-current text-yellow-500"
                       />
                     ))}
                   </div>
-                  <p className=" mb-6">&ldquo;{testimonial.content}&ldquo;</p>
+                  <p className="mb-6">&ldquo;{testimonial.content}&ldquo;</p>
                   <div className="flex items-center">
                     <Image
                       src={testimonial.image}
                       alt={testimonial.name}
                       width={50}
                       height={50}
-                      className="rounded-full mr-4"
+                      className="mr-4 rounded-full"
                     />
                     <div>
-                      <h4 className="font-semibold ">{testimonial.name}</h4>
+                      <h4 className="font-semibold">{testimonial.name}</h4>
                       <p className="">{testimonial.role}</p>
                     </div>
                   </div>

@@ -1,4 +1,5 @@
 "use client";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,6 +20,8 @@ import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ChevronDown } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
+import { useTheme } from "next-themes";
+import { cn } from "@/lib/utils";
 
 type NavbarProps = {
   classname?: string;
@@ -30,23 +33,22 @@ const desktopNav = [
   { navlink: "/community", navlabel: "Community" },
 ];
 
-const Header = ({ classname }: NavbarProps) => {
+const Navbar = ({ classname }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const { theme } = useTheme();
 
   return (
     <>
       <header
-        className={clsx(
-          "z-40 w-full border-b px-2 py-2 backdrop-blur-sm dark:bg-background/80 md:px-4 lg:px-12",
+        className={cn(
+          "z-40 w-full border-b bg-background/80 px-2 py-2 backdrop-blur-sm dark:bg-gray-900/80 md:px-4 lg:px-12",
           classname,
-          pathname === "/token" || pathname === "/reward"
-            ? "bg-[#110C1F]"
-            : "bg-white",
+          theme === "dark" ? "" : "",
         )}
       >
         <nav aria-label="Main-navigation">
-          <ul className="flex flex-col md:m-4 md:flex-row md:items-center md:justify-between md:rounded-xl">
+          <ul className="flex flex-col md:flex-row md:items-center md:justify-between md:rounded-xl">
             <div className="flex items-center justify-between">
               <NameLogo />
               <button
@@ -111,7 +113,7 @@ const Header = ({ classname }: NavbarProps) => {
   );
 };
 
-export default Header;
+export default Navbar;
 
 function NameLogo() {
   const pathname = usePathname();

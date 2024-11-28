@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import IconCloud from "../ui/icon-cloud";
+import { useTheme } from "next-themes";
 
 const techIcons = [
   "typescript",
@@ -37,22 +38,29 @@ const techIcons = [
 ];
 
 export default function Certifications() {
+  const { theme } = useTheme();
+
   return (
-    <section className="relative min-h-screenpy-20 overflow-hidden">
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative min-h-screen overflow-hidden py-20 dark:bg-gray-900">
+      {theme === "dark" && (
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-indigo-900/10 to-gray-900" />
+        </div>
+      )}
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="mb-16 text-center"
         >
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="inline-block px-4 py-1 rounded-full bg-indigo-500/10 text-indigo-400 text-sm mb-8 border border-indigo-500/20"
+            className="mb-8 inline-block rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-1 text-sm text-indigo-400"
           >
             Certifications
           </motion.span>
@@ -62,7 +70,7 @@ export default function Certifications() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold mb-8"
+            className="mb-8 text-4xl font-bold md:text-6xl"
           >
             Practice Tests for
             <br />
@@ -74,7 +82,7 @@ export default function Certifications() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl dark:text-gray-300 max-w-2xl mx-auto mb-16"
+            className="mx-auto mb-16 max-w-2xl text-xl dark:text-gray-300"
           >
             Generate high-quality practice tests for the most in-demand
             certifications across various technologies
@@ -86,7 +94,7 @@ export default function Certifications() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="relative h-[600px] w-full bg-gradient-radial from-indigo-500/5 via-transparent to-transparent"
+          className="bg-gradient-radial relative h-[600px] w-full from-indigo-500/5 via-transparent to-transparent"
         >
           <IconCloud iconSlugs={techIcons} />
         </motion.div>

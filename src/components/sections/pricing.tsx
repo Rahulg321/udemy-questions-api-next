@@ -32,19 +32,19 @@ const features = [
 
 export default function Pricing() {
   return (
-    <section className="relative min-h-screen  py-20 overflow-hidden">
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative min-h-screen overflow-hidden py-20 dark:bg-gray-900">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="mb-16 text-center"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-4">
+          <h2 className="mb-4 text-4xl font-bold md:text-6xl">
             We like keeping things simple
           </h2>
-          <p className="text-3xl md:text-5xl font-semibold">
+          <p className="text-3xl font-semibold md:text-5xl">
             One plan one price.
           </p>
         </motion.div>
@@ -84,13 +84,13 @@ export default function Pricing() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-center mb-12"
+            className="mb-12 text-center"
           >
             <div className="inline-flex items-baseline">
-              <span className="text-7xl md:text-8xl font-bold">$29</span>
-              <span className="text-xl dark:text-gray-400 ml-2">/month</span>
+              <span className="text-7xl font-bold md:text-8xl">$29</span>
+              <span className="ml-2 text-xl dark:text-gray-400">/month</span>
             </div>
-            <p className="dark:text-gray-400 mt-2">(billed annually)</p>
+            <p className="mt-2 dark:text-gray-400">(billed annually)</p>
           </motion.div>
 
           <motion.div
@@ -98,9 +98,9 @@ export default function Pricing() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="max-w-4xl mx-auto"
+            className="mx-auto max-w-4xl"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2">
               {features.map((feature, index) => (
                 <motion.div
                   key={feature.name}
@@ -111,10 +111,10 @@ export default function Pricing() {
                   className="flex items-start space-x-3"
                 >
                   <div className="flex-shrink-0 pt-1">
-                    <Check className="w-5 h-5 text-indigo-400" />
+                    <Check className="h-5 w-5 text-indigo-400" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold ">{feature.name}</h3>
+                    <h3 className="text-lg font-semibold">{feature.name}</h3>
                     <p className="dark:text-gray-400">{feature.description}</p>
                   </div>
                 </motion.div>
@@ -128,10 +128,10 @@ export default function Pricing() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="text-center"
             >
-              <button className="bg-indigo-600 text-white px-8 py-4 rounded-lg font-medium hover:bg-indigo-700 transition-colors inline-flex items-center space-x-2">
+              <button className="inline-flex items-center space-x-2 rounded-lg bg-indigo-600 px-8 py-4 font-medium text-white transition-colors hover:bg-indigo-700">
                 Start your 14-day free trial
               </button>
-              <p className="text-gray-400 mt-4">No credit card required</p>
+              <p className="mt-4 text-gray-400">No credit card required</p>
             </motion.div>
           </motion.div>
         </div>

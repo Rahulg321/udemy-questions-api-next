@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Sparkles, BookOpen, DollarSign } from "lucide-react";
 import Ripple from "@/components/ui/ripple";
 import AnimatedGradientText from "@/components/ui/animated-gradient-text";
+import { useTheme } from "next-themes";
 
 const features = [
   {
@@ -27,12 +28,19 @@ const features = [
 ];
 
 export default function Hero() {
+  const { theme } = useTheme();
+
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden hero-gradient pt-16">
+    <section className="hero-gradient relative flex min-h-[90vh] items-center justify-center overflow-hidden pt-16">
+      {/* Animated gradient overlay */}
+      {theme === "dark" && (
+        <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/30 via-gray-900/80 to-gray-900" />
+      )}
+
       {/* Ripple Effect */}
       <Ripple className="z-0" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -51,7 +59,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.h1
-            className="text-5xl md:text-7xl font-bold  mb-6"
+            className="mb-6 text-5xl font-bold md:text-7xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -61,7 +69,7 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p
-            className="text-xl mb-8 max-w-2xl mx-auto"
+            className="mx-auto mb-8 max-w-2xl text-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -71,34 +79,34 @@ export default function Hero() {
           </motion.p>
 
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
+            className="mb-16 flex flex-col justify-center gap-4 sm:flex-row"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <motion.button
-              className="group bg-indigo-600 text-white px-8 py-4 rounded-lg font-medium hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 relative overflow-hidden"
+              className="group relative flex items-center justify-center gap-2 overflow-hidden rounded-lg bg-indigo-600 px-8 py-4 font-medium text-white transition-all hover:bg-indigo-700"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <Sparkles className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform" />
+              <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 transition-opacity group-hover:opacity-100" />
+              <Sparkles className="relative z-10 h-5 w-5 transition-transform group-hover:rotate-12" />
               <span className="relative z-10">Start Creating</span>
             </motion.button>
 
             <motion.button
-              className="group bg-gray-800 text-white px-8 py-4 rounded-lg font-medium border-2 border-gray-700 hover:bg-gray-700 hover:border-gray-600 transition-all flex items-center justify-center gap-2"
+              className="group flex items-center justify-center gap-2 rounded-lg border-2 border-gray-700 bg-gray-800 px-8 py-4 font-medium text-white transition-all hover:border-gray-600 hover:bg-gray-700"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <BookOpen className="w-5 h-5" />
+              <BookOpen className="h-5 w-5" />
               Watch Demo
             </motion.button>
           </motion.div>
 
           {/* Enhanced feature icons */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto relative"
+            className="relative mx-auto grid max-w-3xl grid-cols-1 gap-8 md:grid-cols-3"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
@@ -109,23 +117,23 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1 + item.delay }}
-                className="relative group"
+                className="group relative"
               >
                 <motion.div
-                  className={`w-16 h-16 mx-auto rounded-2xl bg-gradient-to-r ${item.gradient} p-0.5 relative`}
+                  className={`mx-auto h-16 w-16 rounded-2xl bg-gradient-to-r ${item.gradient} relative p-0.5`}
                   whileHover={{ scale: 1.1 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div className="w-full h-full rounded-2xl bg-gray-900 flex items-center justify-center relative overflow-hidden group-hover:bg-gray-800 transition-colors">
+                  <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-2xl bg-gray-900 transition-colors group-hover:bg-gray-800">
                     {/* Animated gradient border */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                    <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
 
-                    <item.icon className="w-8 h-8 text-white relative z-10 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
+                    <item.icon className="relative z-10 h-8 w-8 text-white transition-all duration-300 group-hover:rotate-12 group-hover:scale-110" />
                   </div>
                 </motion.div>
 
                 <motion.p
-                  className="font-medium mt-4 group-hover:text-indigo-400 transition-colors"
+                  className="mt-4 font-medium transition-colors group-hover:text-indigo-400"
                   whileHover={{ scale: 1.05 }}
                 >
                   {item.text}

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Download, Copy } from "lucide-react";
+import { useTheme } from "next-themes";
 import { useState } from "react";
 
 interface ApiEndpoint {
@@ -70,6 +71,7 @@ const apiEndpoints: ApiEndpoint[] = [
 ];
 
 export default function ApiSection() {
+  const { theme } = useTheme();
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
   const handleCopy = async (json: string, index: number) => {
@@ -101,6 +103,14 @@ export default function ApiSection() {
 
   return (
     <section className="relative py-20">
+      {/* Background gradients */}
+      {theme === "dark" && (
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-900 to-gray-900" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-500/10 via-transparent to-transparent" />
+        </div>
+      )}
+
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}
@@ -147,6 +157,8 @@ export default function ApiSection() {
                 transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
                 className="group relative"
               >
+                <div className="absolute -inset-px rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 opacity-50 blur transition duration-1000 group-hover:opacity-100 group-hover:duration-200" />
+
                 <div className="relative h-full rounded-lg bg-muted p-6 dark:bg-gray-900">
                   <h3 className="mb-2 text-xl font-semibold">
                     {endpoint.title}
@@ -166,7 +178,7 @@ export default function ApiSection() {
                     <div className="absolute right-4 top-4 flex items-center space-x-2">
                       <button
                         onClick={() => handleCopy(endpoint.json, index)}
-                        className="rounded-lg p-2 transition-colors dark:bg-gray-800 dark:hover:bg-gray-700"
+                        className="rounded-lg p-2 transition-colors hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700"
                         title="Copy to clipboard"
                       >
                         <Copy className="h-4 w-4 text-gray-400" />
@@ -180,7 +192,7 @@ export default function ApiSection() {
                         onClick={() =>
                           handleDownload(endpoint.json, endpoint.endpoint)
                         }
-                        className="rounded-lg p-2 transition-colors dark:bg-gray-800 dark:hover:bg-gray-700"
+                        className="rounded-lg p-2 transition-colors hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700"
                         title="Download JSON"
                       >
                         <Download className="h-4 w-4 text-gray-400" />
@@ -211,6 +223,8 @@ export default function ApiSection() {
                 transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
                 className="group relative"
               >
+                <div className="absolute -inset-px rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 opacity-50 blur transition duration-1000 group-hover:opacity-100 group-hover:duration-200" />
+
                 <div className="relative h-full rounded-lg bg-muted p-6 dark:bg-gray-900">
                   <h3 className="mb-2 text-xl font-semibold">
                     {endpoint.title}
@@ -235,7 +249,7 @@ export default function ApiSection() {
                             index + postEndpoints.length,
                           )
                         }
-                        className="rounded-lg p-2 transition-colors dark:bg-gray-800 dark:hover:bg-gray-700"
+                        className="rounded-lg p-2 transition-colors hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700"
                         title="Copy to clipboard"
                       >
                         <Copy className="h-4 w-4 text-gray-400" />
@@ -249,7 +263,7 @@ export default function ApiSection() {
                         onClick={() =>
                           handleDownload(endpoint.json, endpoint.endpoint)
                         }
-                        className="rounded-lg p-2 transition-colors dark:bg-gray-800 dark:hover:bg-gray-700"
+                        className="rounded-lg p-2 transition-colors hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700"
                         title="Download JSON"
                       >
                         <Download className="h-4 w-4 text-gray-400" />
