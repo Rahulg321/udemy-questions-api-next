@@ -92,28 +92,29 @@ export default function ApiSection() {
 
   // Filter endpoints by method
   const postEndpoints = apiEndpoints.filter(
-    (endpoint) => endpoint.method === "POST"
+    (endpoint) => endpoint.method === "POST",
   );
+
   const getEndpoints = apiEndpoints.filter(
-    (endpoint) => endpoint.method === "GET"
+    (endpoint) => endpoint.method === "GET",
   );
 
   return (
     <section className="relative py-20">
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="mb-16 text-center"
         >
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold  mb-4"
+            className="mb-4 text-4xl font-bold md:text-6xl"
           >
             Finally, a course creator API
             <br />
@@ -127,7 +128,7 @@ export default function ApiSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl text-gray-400 max-w-3xl mx-auto"
+            className="mx-auto max-w-3xl text-xl text-gray-400"
           >
             Our API provides Udemy Practice Test Course creation for any
             subject, any certification, any complexity, any vendor.
@@ -136,7 +137,7 @@ export default function ApiSection() {
 
         {/* POST endpoints */}
         <div className="mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {postEndpoints.map((endpoint, index) => (
               <motion.div
                 key={index}
@@ -144,19 +145,19 @@ export default function ApiSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
-                className="relative group"
+                className="group relative"
               >
-                <div className="relative bg-muted dark:bg-gray-900 rounded-lg p-6 h-full">
-                  <h3 className="text-xl font-semibold  mb-2">
+                <div className="relative h-full rounded-lg bg-muted p-6 dark:bg-gray-900">
+                  <h3 className="mb-2 text-xl font-semibold">
                     {endpoint.title}
                   </h3>
-                  <p className=" mb-4">{endpoint.description}</p>
+                  <p className="mb-4">{endpoint.description}</p>
 
-                  <div className="flex items-center space-x-2 mb-4">
-                    <span className="px-2 py-1 rounded text-sm font-medium bg-blue-500/10 text-blue-400">
+                  <div className="mb-4 flex items-center space-x-2">
+                    <span className="rounded bg-blue-500/10 px-2 py-1 text-sm font-medium text-blue-400">
                       {endpoint.method}
                     </span>
-                    <code className="dark:text-gray-400 font-mono text-sm">
+                    <code className="font-mono text-sm dark:text-gray-400">
                       {endpoint.endpoint}
                     </code>
                   </div>
@@ -165,12 +166,12 @@ export default function ApiSection() {
                     <div className="absolute right-4 top-4 flex items-center space-x-2">
                       <button
                         onClick={() => handleCopy(endpoint.json, index)}
-                        className="p-2 rounded-lg dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
+                        className="rounded-lg p-2 transition-colors dark:bg-gray-800 dark:hover:bg-gray-700"
                         title="Copy to clipboard"
                       >
-                        <Copy className="w-4 h-4 text-gray-400" />
+                        <Copy className="h-4 w-4 text-gray-400" />
                         {copiedIndex === index && (
-                          <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-gray-800 text-white text-xs rounded">
+                          <span className="absolute -top-8 left-1/2 -translate-x-1/2 transform rounded bg-gray-800 px-2 py-1 text-xs text-white">
                             Copied!
                           </span>
                         )}
@@ -179,15 +180,15 @@ export default function ApiSection() {
                         onClick={() =>
                           handleDownload(endpoint.json, endpoint.endpoint)
                         }
-                        className="p-2 rounded-lg dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
+                        className="rounded-lg p-2 transition-colors dark:bg-gray-800 dark:hover:bg-gray-700"
                         title="Download JSON"
                       >
-                        <Download className="w-4 h-4 text-gray-400" />
+                        <Download className="h-4 w-4 text-gray-400" />
                       </button>
                     </div>
 
-                    <div className=" bg-gray-200 dark:bg-gray-800 rounded-lg p-4 font-mono text-sm overflow-x-auto">
-                      <pre className="dark:text-gray-300 leading-loose">
+                    <div className="overflow-x-auto rounded-lg bg-gray-200 p-4 font-mono text-sm dark:bg-gray-800">
+                      <pre className="leading-loose dark:text-gray-300">
                         {endpoint.json}
                       </pre>
                     </div>
@@ -200,7 +201,7 @@ export default function ApiSection() {
 
         {/* GET endpoints */}
         <div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {getEndpoints.map((endpoint, index) => (
               <motion.div
                 key={index}
@@ -208,19 +209,19 @@ export default function ApiSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
-                className="relative group"
+                className="group relative"
               >
-                <div className="relative bg-muted dark:bg-gray-900 rounded-lg p-6 h-full">
-                  <h3 className="text-xl font-semibold  mb-2">
+                <div className="relative h-full rounded-lg bg-muted p-6 dark:bg-gray-900">
+                  <h3 className="mb-2 text-xl font-semibold">
                     {endpoint.title}
                   </h3>
-                  <p className=" mb-4">{endpoint.description}</p>
+                  <p className="mb-4">{endpoint.description}</p>
 
-                  <div className="flex items-center space-x-2 mb-4">
-                    <span className="px-2 py-1 rounded text-sm font-medium bg-emerald-500/10 text-emerald-400">
+                  <div className="mb-4 flex items-center space-x-2">
+                    <span className="rounded bg-emerald-500/10 px-2 py-1 text-sm font-medium text-emerald-400">
                       {endpoint.method}
                     </span>
-                    <code className="dark:text-gray-400 font-mono text-sm">
+                    <code className="font-mono text-sm dark:text-gray-400">
                       {endpoint.endpoint}
                     </code>
                   </div>
@@ -231,15 +232,15 @@ export default function ApiSection() {
                         onClick={() =>
                           handleCopy(
                             endpoint.json,
-                            index + postEndpoints.length
+                            index + postEndpoints.length,
                           )
                         }
-                        className="p-2 rounded-lg dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
+                        className="rounded-lg p-2 transition-colors dark:bg-gray-800 dark:hover:bg-gray-700"
                         title="Copy to clipboard"
                       >
-                        <Copy className="w-4 h-4 text-gray-400" />
+                        <Copy className="h-4 w-4 text-gray-400" />
                         {copiedIndex === index + postEndpoints.length && (
-                          <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-gray-800 text-white text-xs rounded">
+                          <span className="absolute -top-8 left-1/2 -translate-x-1/2 transform rounded bg-gray-800 px-2 py-1 text-xs text-white">
                             Copied!
                           </span>
                         )}
@@ -248,14 +249,14 @@ export default function ApiSection() {
                         onClick={() =>
                           handleDownload(endpoint.json, endpoint.endpoint)
                         }
-                        className="p-2 rounded-lg dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
+                        className="rounded-lg p-2 transition-colors dark:bg-gray-800 dark:hover:bg-gray-700"
                         title="Download JSON"
                       >
-                        <Download className="w-4 h-4 text-gray-400" />
+                        <Download className="h-4 w-4 text-gray-400" />
                       </button>
                     </div>
 
-                    <div className=" bg-gray-200 dark:bg-gray-800 rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                    <div className="overflow-x-auto rounded-lg bg-gray-200 p-4 font-mono text-sm dark:bg-gray-800">
                       <pre className="leading-loose">{endpoint.json}</pre>
                     </div>
                   </div>
