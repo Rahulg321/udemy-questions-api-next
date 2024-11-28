@@ -103,8 +103,7 @@ const Navbar = ({ classname }: NavbarProps) => {
             <DesktopMenu />
             {/* if session does not exist user is not logged in and dont show the login and sign up links */}
             <div className="flex gap-2">
-              {<AuthDialogNavs />}
-              <ModeToggle />
+              <AuthDialogNavs />
             </div>
           </ul>
         </nav>
